@@ -1,0 +1,111 @@
+  .search-container {
+    max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.search-button {
+  background: #ff9900;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-button:hover {
+  background: #cc7a00;
+}
+
+.results-container {
+  overflow-y: auto;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-card {
+  display: flex;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+}
+
+.card-img {
+  width: 30%;
+  height: 100%;
+  background: #e0e0e0; /* Placeholder background for image */
+}
+
+.card-body {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.card-price {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+}
+
+.buy-button {
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.buy-button:hover {
+  background: #0056b3;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.no-results {
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+}

@@ -1,5 +1,1 @@
-website load
-parsing
-html tree traveral
-data extraction
-transform your data
+card-padding(div)->reviewText(div)

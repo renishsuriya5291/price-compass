@@ -81,6 +81,63 @@ async def get_item(q: str):
 
     return JSONResponse(content={"data": results})
 
+def fetch_reviews(url):
+    driver = create_driver()
+    reviews = []
+
+    try:
+        driver.get(url)
+
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "review-views"))
+        )
+
+        # Fetch reviews from the list of review cards
+        review_cards = driver.find_elements(By.CLASS_NAME, "a-section.review.aok-relative")
+
+        for card in review_cards:
+            soup = BeautifulSoup(card.get_attribute("outerHTML"), 'html.parser')
+
+            # Fetch reviewer name
+            reviewer_name_tag = soup.select_one('.a-profile-name')
+            reviewer_name = reviewer_name_tag.get_text(strip=True) if reviewer_name_tag else "No Name"
+
+            # Fetch rating
+            rating_tag = soup.select_one('.a-icon-alt')
+            rating = float(rating_tag.get_text(strip=True).split()[0]) if rating_tag else 0.0
+
+            # Fetch review text
+            review_text_tag = soup.select_one('.review-text-content span')
+            review_text = review_text_tag.get_text(strip=True) if review_text_tag else "No Review"
+
+            # Fetch profile link
+            profile_link_tag = soup.select_one('.a-profile')
+            profile_link = f"https://www.amazon.in/{profile_link_tag.get('href')}" if profile_link_tag else "No Profile Link"
+
+            # Append the review data
+            reviews.append({
+                "reviewer_name": reviewer_name,
+                "rating": rating,
+                "review_text": review_text,
+                "profile_link": profile_link
+            })
+
+    finally:
+        driver.quit()
+
+    return reviews
+
+@app.get("/reviews")
+async def get_reviews(q: str):
+    start_time = time.time()
+    reviews = fetch_reviews(q)
+
+    elapsed_time = time.time() - start_time
+    print(f"This result took {elapsed_time:.2f} seconds.")
+
+    return JSONResponse(content={"reviews": reviews})
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app)

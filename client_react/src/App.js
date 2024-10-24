@@ -1,19 +1,38 @@
 import React from "react";
 import SearchComponent from "./Components/SearchComponent/SearchComponent";
 import './App.css';
+import Navbar from "./Components/Navbar/Navbar";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import ReviewComponent from "./Components/ReviewComponent/ReviewComponent";
+import Reviews from "./Components/Reviews/Reviews";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div className="vh-100">
-      <div className="row justify-content-center align-items-center h-100">
-        <div className="text-center">
-          <h1 className="app-title mt-5">Price Compass</h1>
-          <p className="app-description">Find the best price for your favorite products.</p>
-          <SearchComponent />
-        </div>
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <TransitionGroup>
+        <CSSTransition key={location.key} classNames="fade" timeout={100}>
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/reviews" element={<Reviews />} />
+          </Routes>
+        </CSSTransition>
+      </TransitionGroup>
+    </>
   );
 }
 
-export default App;
+// Wrap App in Router outside of the component for correct use of useLocation
+function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
+
+export default AppWrapper;

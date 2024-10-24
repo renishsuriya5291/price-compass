@@ -1,4 +1,4 @@
-  .search-container {
+.search-container {
     max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -109,48 +109,20 @@
   font-weight: bold;
   color: #666;
 }
-
-
-/* Sliding in/out animation */
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideOut {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
+.status-container {
+  text-align: center;
+  margin: 10px 0;
 }
 
 .status-text {
-  font-size: 16px;
-  color: #555;
-  text-align: center;
-  margin-top: 20px;
-  animation: slideIn 0.5s forwards;
+  animation: fadeIn 0.5s ease-in;
 }
 
-.status-container {
-  margin-bottom: 20px;
-  height: 30px; /* Ensure consistent space even when hidden */
-}
-
-.status-text.slide-in {
-  animation: slideIn 0.5s forwards;
-}
-
-.status-text.slide-out {
-  animation: slideOut 0.5s forwards;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
